@@ -29,10 +29,6 @@ public class ConstructorExecutable {
         this.parameters = parameters;
     }
 
-    public Constructor getConstructor() {
-        return constructor;
-    }
-
     public Object instantiate() {
         try {
             return constructor.newInstance(parameters.toArray());
