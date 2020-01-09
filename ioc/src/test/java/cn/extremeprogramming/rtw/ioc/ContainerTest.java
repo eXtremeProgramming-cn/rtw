@@ -45,6 +45,8 @@ public class ContainerTest {
         Container container = new Container();
         Engine engine = new Engine("XP00001");
         container.addComponent(engine);
-//        container.addComponent(Car.class);
+        container.addComponent(Car.class);
+        Car car = container.getComponent(Car.class);
+        assertThat(car.toString(), is("Car: \n\tEngine: XP00001"));
     }
 }

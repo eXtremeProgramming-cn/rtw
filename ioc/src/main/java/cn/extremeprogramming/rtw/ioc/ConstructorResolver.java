@@ -3,12 +3,10 @@ package cn.extremeprogramming.rtw.ioc;
 import cn.extremeprogramming.rtw.ioc.exceptions.ConstructorNotFound;
 
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+import static cn.extremeprogramming.rtw.ioc.ConstructorExecutable.satisfy;
 import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
 
 public class ConstructorResolver {
     private final Class clazz;
@@ -30,16 +28,4 @@ public class ConstructorResolver {
         throw new ConstructorNotFound(clazz, dependencies);
     }
 
-    private ConstructorExecutable satisfy(Constructor constructor, List<Object> dependencies) {
-        Class[] parameterTypes = constructor.getParameterTypes();
-        List<Object> parameters = new ArrayList<>();
-        for (Class parameterType : parameterTypes) {
-            Optional<Object> parameterCandidate = dependencies.stream().filter(parameterType::isInstance).findFirst();
-            if(!parameterCandidate.isPresent()) {
-                return null;
-            }
-            parameters.add(parameterCandidate.get());
-        }
-        return new ConstructorExecutable(constructor, parameters);
-    }
 }

@@ -1,5 +1,6 @@
 package cn.extremeprogramming.rtw.ioc;
 
+import cn.extremeprogramming.rtw.ioc.exceptions.InstantiationFailure;
 import org.junit.Test;
 
 import java.lang.reflect.Constructor;
@@ -20,5 +21,12 @@ public class ConstructorExecutableTest {
         Constructor<String> constructor = String.class.getConstructor(String.class);
         executable = new ConstructorExecutable(constructor, singletonList("Hello"));
         assertThat(executable.instantiate(), is("Hello"));
+    }
+
+    @Test(expected = InstantiationFailure.class)
+    public void should_handle_exceptions_gracefully() throws Exception {
+        Constructor<String> constructor = String.class.getConstructor(String.class);
+        ConstructorExecutable executable = new ConstructorExecutable(constructor, emptyList());
+        executable.instantiate();
     }
 }
