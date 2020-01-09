@@ -27,7 +27,8 @@ public class ConstructorResolverTest {
     @Test
     public void should_resolve_constructor_with_appropriate_parameters() throws NoSuchMethodException {
         ConstructorResolver resolver = new ConstructorResolver(Integer.class);
-//        Constructor constructor = resolver.resolve(singletonList(1));
-//        assertThat(constructor, is(Integer.class.getConstructor(int.class)));
+        ConstructorExecutable executable = resolver.resolve(singletonList("1"));
+        Constructor constructor = executable.getConstructor();
+        assertThat(constructor, is(Integer.class.getConstructor(String.class)));
     }
 }

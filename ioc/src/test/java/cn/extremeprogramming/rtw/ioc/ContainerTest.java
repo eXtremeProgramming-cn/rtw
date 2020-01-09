@@ -1,6 +1,7 @@
 package cn.extremeprogramming.rtw.ioc;
 
 import cn.extremeprogramming.rtw.ioc.exceptions.ComponentNotFound;
+import cn.extremeprogramming.rtw.ioc.sample.Car;
 import cn.extremeprogramming.rtw.ioc.sample.Engine;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,9 +28,9 @@ public class ContainerTest {
 
     @Test
     public void should_create_components_with_classes_specified() throws Exception {
-        container.addComponent(String.class);
+        container.addComponent("XP-xxx-xxx-xxxx");
         container.addComponent(Engine.class);
-        assertThat(container.getComponent(String.class), is(""));
+        assertThat(container.getComponent(String.class), is("XP-xxx-xxx-xxxx"));
         assertThat(container.getComponent(Engine.class).toString(), is("Engine: XP-xxx-xxx-xxxx"));
     }
 
@@ -40,15 +41,10 @@ public class ContainerTest {
     }
 
     @Test
-    public void should_create_component_with_non_default_constructor() throws Exception {
-        container.addComponent(1);
-//        container.addComponent(Integer.class);
+    public void should_inject_dependency_through_constructor() {
+        Container container = new Container();
+        Engine engine = new Engine("XP00001");
+        container.addComponent(engine);
+//        container.addComponent(Car.class);
     }
-
-//    @Test
-//    public void should_inject_dependency_through_constructor() {
-//        Container container = new Container();
-//        Engine engine = new Engine("XP00001");
-//        container.addComponent(engine);
-//    }
 }

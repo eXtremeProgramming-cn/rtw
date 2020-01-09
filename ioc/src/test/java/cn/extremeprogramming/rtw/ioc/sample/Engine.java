@@ -7,10 +7,6 @@ public class Engine {
         this.id = id;
     }
 
-    public Engine() {
-        id = "XP-xxx-xxx-xxxx";
-    }
-
     @Override
     public String toString() {
         return "Engine: " + id;

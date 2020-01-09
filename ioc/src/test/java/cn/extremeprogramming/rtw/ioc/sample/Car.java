@@ -1,6 +1,6 @@
 package cn.extremeprogramming.rtw.ioc.sample;
 
-class Car {
+public class Car {
     private final Engine engine;
 
     public Car(Engine engine) {
