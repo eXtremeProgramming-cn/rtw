@@ -1,5 +1,6 @@
 package cn.extremeprogramming.rtw.ioc;
 
+import cn.extremeprogramming.rtw.ioc.exceptions.ComponentNotFound;
 import cn.extremeprogramming.rtw.ioc.sample.Engine;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,6 +37,12 @@ public class ContainerTest {
     public void should_behave_gracefully_when_component_not_found() {
         container.addComponent("Hello");
         container.getComponent(Integer.class);
+    }
+
+    @Test
+    public void should_create_component_with_non_default_constructor() throws Exception {
+        container.addComponent(1);
+//        container.addComponent(Integer.class);
     }
 
 //    @Test

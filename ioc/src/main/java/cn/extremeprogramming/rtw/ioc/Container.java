@@ -1,5 +1,7 @@
 package cn.extremeprogramming.rtw.ioc;
 
+import cn.extremeprogramming.rtw.ioc.exceptions.ComponentNotFound;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -13,8 +15,8 @@ public class Container {
         components.add(component);
     }
 
-    public void addComponent(Class clazz) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        Constructor defaultConstructor = clazz.getConstructor();
+    public void addComponent(Class clazz) throws IllegalAccessException, InvocationTargetException, InstantiationException {
+        Constructor defaultConstructor = new ConstructorResolver(clazz).resolve(components);
         Object component = defaultConstructor.newInstance();
         addComponent(component);
     }

@@ -1,7 +1,5 @@
 package cn.extremeprogramming.rtw.ioc.sample;
 
-import java.util.Date;
-
 public class Engine {
     private final String id;
 
