@@ -16,7 +16,8 @@ public class Container {
     }
 
     public void addComponent(Class clazz) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        Constructor defaultConstructor = new ConstructorResolver(clazz).resolve(components);
+        ConstructorExecutable constructorExecutable = new ConstructorResolver(clazz).resolve(components);
+        Constructor defaultConstructor = constructorExecutable.getConstructor();
         Object component = defaultConstructor.newInstance();
         addComponent(component);
     }
