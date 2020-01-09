@@ -30,16 +30,9 @@ public class Components {
 
     public List<Object> findByTypes(List<Class> types) {
         return types.stream()
-                .map(type -> findByTypeNullable(type))
+                .map(type -> findByType(type))
                 .filter(Objects::nonNull)
                 .collect(toList());
     }
 
-    private <T> T findByTypeNullable(Class<T> clazz) {
-        try {
-            return findByType(clazz);
-        } catch (ComponentNotFound e) {
-            return null;
-        }
-    }
 }

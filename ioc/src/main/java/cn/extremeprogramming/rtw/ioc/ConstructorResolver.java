@@ -1,5 +1,6 @@
 package cn.extremeprogramming.rtw.ioc;
 
+import cn.extremeprogramming.rtw.ioc.exceptions.ComponentNotFound;
 import cn.extremeprogramming.rtw.ioc.exceptions.ConstructorNotFound;
 
 import java.lang.reflect.Constructor;
@@ -20,9 +21,9 @@ public class ConstructorResolver {
         constructors.sort((ctor1, ctor2) ->
                 ctor2.getParameterCount() - ctor1.getParameterCount());
         for (Constructor constructor : constructors) {
-            ConstructorExecutable constructorExecutable = satisfy(constructor, dependencies);
-            if (constructorExecutable != null) {
-                return constructorExecutable;
+            try {
+                return satisfy(constructor, dependencies);
+            }catch (ComponentNotFound ignored){
             }
         }
 

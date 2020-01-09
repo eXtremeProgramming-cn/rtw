@@ -1,5 +1,6 @@
 package cn.extremeprogramming.rtw.ioc;
 
+import cn.extremeprogramming.rtw.ioc.exceptions.ComponentNotFound;
 import cn.extremeprogramming.rtw.ioc.exceptions.InstantiationFailure;
 
 import java.lang.reflect.Constructor;
@@ -11,10 +12,7 @@ public class ConstructorExecutable {
     static ConstructorExecutable satisfy(Constructor constructor, Components dependencies) {
         List<Class> parameterTypes = asList(constructor.getParameterTypes());
         List<Object> parameters = dependencies.findByTypes(parameterTypes);
-        if (parameters.size() == parameterTypes.size()) {
-            return new ConstructorExecutable(constructor, parameters);
-        }
-        return null;
+        return new ConstructorExecutable(constructor, parameters);
     }
 
     private final Constructor constructor;
