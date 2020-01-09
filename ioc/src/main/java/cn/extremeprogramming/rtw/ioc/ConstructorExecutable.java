@@ -3,22 +3,18 @@ package cn.extremeprogramming.rtw.ioc;
 import cn.extremeprogramming.rtw.ioc.exceptions.InstantiationFailure;
 
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
+import static java.util.Arrays.asList;
 
 public class ConstructorExecutable {
-    static ConstructorExecutable satisfy(Constructor constructor, List<Object> dependencies) {
-        Class[] parameterTypes = constructor.getParameterTypes();
-        List<Object> parameters = new ArrayList<>();
-        for (Class parameterType : parameterTypes) {
-            Optional<Object> parameterCandidate = dependencies.stream().filter(parameterType::isInstance).findFirst();
-            if(!parameterCandidate.isPresent()) {
-                return null;
-            }
-            parameters.add(parameterCandidate.get());
+    static ConstructorExecutable satisfy(Constructor constructor, Components dependencies) {
+        List<Class> parameterTypes = asList(constructor.getParameterTypes());
+        List<Object> parameters = dependencies.findByTypes(parameterTypes);
+        if (parameters.size() == parameterTypes.size()) {
+            return new ConstructorExecutable(constructor, parameters);
         }
-        return new ConstructorExecutable(constructor, parameters);
+        return null;
     }
 
     private final Constructor constructor;

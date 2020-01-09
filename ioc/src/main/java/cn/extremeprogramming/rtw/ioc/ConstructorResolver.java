@@ -15,9 +15,10 @@ public class ConstructorResolver {
         this.clazz = clazz;
     }
 
-    public ConstructorExecutable resolve(List<Object> dependencies) {
+    public ConstructorExecutable resolve(Components dependencies) {
         List<Constructor> constructors = asList(clazz.getConstructors());
-        constructors.sort((ctor1, ctor2) -> ctor2.getParameterCount() - ctor1.getParameterCount());
+        constructors.sort((ctor1, ctor2) ->
+                ctor2.getParameterCount() - ctor1.getParameterCount());
         for (Constructor constructor : constructors) {
             ConstructorExecutable constructorExecutable = satisfy(constructor, dependencies);
             if (constructorExecutable != null) {
