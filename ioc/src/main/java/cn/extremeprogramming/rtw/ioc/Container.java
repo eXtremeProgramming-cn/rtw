@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Container {
     private final List<Object> components = new ArrayList<>();
@@ -19,6 +20,10 @@ public class Container {
     }
 
     public <T> T getComponent(Class<T> clazz) {
-        return (T) components.stream().filter(clazz::isInstance).findFirst().get();
+        Optional<Object> candidate = components.stream().filter(clazz::isInstance).findFirst();
+        if(!candidate.isPresent()) {
+            throw new ComponentNotFound(clazz);
+        }
+        return (T) candidate.get();
     }
 }
