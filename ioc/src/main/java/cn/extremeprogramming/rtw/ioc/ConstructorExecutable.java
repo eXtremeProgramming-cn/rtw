@@ -1,6 +1,5 @@
 package cn.extremeprogramming.rtw.ioc;
 
-import cn.extremeprogramming.rtw.ioc.exceptions.ComponentNotFound;
 import cn.extremeprogramming.rtw.ioc.exceptions.InstantiationFailure;
 
 import java.lang.reflect.Constructor;

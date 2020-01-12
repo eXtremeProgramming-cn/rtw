@@ -9,14 +9,12 @@ import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 
 public class Setters {
-    private List<Method> setters;
-    private final Class clazz;
+    private final List<Method> setters;
 
     public Setters(Class clazz) {
         setters = stream(clazz.getMethods())
                 .filter(this::isSetter)
                 .collect(toList());
-        this.clazz = clazz;
     }
 
     public int size() {
