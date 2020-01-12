@@ -14,7 +14,10 @@ public class Container {
     }
 
     public <T> T getComponent(Class<T> clazz) {
-        return components.findByType(clazz);
+        T component = components.findByType(clazz);
+        Setters setters = new Setters(clazz);
+        setters.invoke(component, components);
+        return component;
     }
 
 }

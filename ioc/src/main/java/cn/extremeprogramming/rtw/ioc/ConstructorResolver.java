@@ -29,5 +29,4 @@ public class ConstructorResolver {
 
         throw new ConstructorNotFound(clazz, dependencies);
     }
-
 }

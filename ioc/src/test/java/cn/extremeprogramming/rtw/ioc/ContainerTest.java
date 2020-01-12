@@ -49,4 +49,16 @@ public class ContainerTest {
         Car car = container.getComponent(Car.class);
         assertThat(car.toString(), is("Car: \n\tEngine: XP00001"));
     }
+
+    @Test
+    public void should_inject_dependency_through_setter() {
+        Container container = new Container();
+        Engine engine = new Engine("XP00001");
+        container.addComponent(engine);
+        container.addComponent(Car.class);
+        container.addComponent("Jeff's Car");
+
+        Car car = container.getComponent(Car.class);
+        assertThat(car.getName(), is("Jeff's Car"));
+    }
 }
