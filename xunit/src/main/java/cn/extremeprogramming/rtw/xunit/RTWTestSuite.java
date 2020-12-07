@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 public abstract class RTWTestSuite {
     private final List<RTWTestCase> testCases = new ArrayList<>();
 
@@ -25,7 +27,7 @@ public abstract class RTWTestSuite {
     }
 
     public RTWTestSuiteResult execute() {
-        List<RTWTestCaseResult> testCaseResults = testCases.stream().map(RTWTestCase::execute).collect(Collectors.toList());
+        List<RTWTestCaseResult> testCaseResults = testCases.stream().map(RTWTestCase::execute).collect(toList());
         return new RTWTestSuiteResult(testCaseResults);
     }
 }

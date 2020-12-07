@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
 
 public class RTWTestSuiteResult {
     private final List<RTWTestCaseResult> testCaseResults;
@@ -27,5 +28,13 @@ public class RTWTestSuiteResult {
     @Override
     public String toString() {
         return testCaseResults.stream().map(Object::toString).collect(joining());
+    }
+
+    public List<RTWTestCaseResult> failedTestCaseResults() {
+        return testCaseResults.stream().filter(r -> !r.isSuccessful()).collect(toList());
+    }
+
+    public String failedTestCaseNames() {
+        return failedTestCaseResults().stream().map(r -> String.format("   - %s", r.testCaseName())).collect(joining("\n"));
     }
 }

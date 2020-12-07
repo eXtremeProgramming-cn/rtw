@@ -12,3 +12,15 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
+
+ext {
+    javaMainClass = "cn.extremeprogramming.rtw.xunit.RTWTestRunner"
+}
+
+task dogfood(type: JavaExec) {
+    group = "Test"
+    description = "Execute dogfood test suite"
+    classpath = sourceSets.main.runtimeClasspath + sourceSets.test.runtimeClasspath
+    main = javaMainClass
+    dependsOn test
+}
