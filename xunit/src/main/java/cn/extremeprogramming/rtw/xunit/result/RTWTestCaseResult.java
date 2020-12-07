@@ -1,8 +1,9 @@
 package cn.extremeprogramming.rtw.xunit.result;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.joining;
 
 public class RTWTestCaseResult {
     private final List<RTWTestMethodResult> testMethodResults;
@@ -21,6 +22,6 @@ public class RTWTestCaseResult {
 
     @Override
     public String toString() {
-        return testMethodResults.stream().map(Object::toString).collect(Collectors.joining());
+        return testMethodResults.stream().map(Object::toString).collect(joining());
     }
 }

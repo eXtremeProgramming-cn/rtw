@@ -3,6 +3,8 @@ package cn.extremeprogramming.rtw.xunit.result;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.joining;
+
 public class RTWTestSuiteResult {
     private final List<RTWTestCaseResult> testCaseResults;
 
@@ -24,6 +26,6 @@ public class RTWTestSuiteResult {
 
     @Override
     public String toString() {
-        return testCaseResults.stream().map(Object::toString).collect(Collectors.joining());
+        return testCaseResults.stream().map(Object::toString).collect(joining());
     }
 }
