@@ -1,0 +1,37 @@
+package cn.extremeprogramming.rtw.xunit;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public abstract class RTWTestCase {
+    private final List<Runnable> testMethods = new ArrayList<>();
+
+    protected RTWTestCase() {
+        registerTestMethods();
+    }
+
+    public int numberOfTestMethods() {
+        return testMethods.size();
+    }
+
+    protected void addTestMethod(Runnable testMethod) {
+        testMethods.add(testMethod);
+    }
+
+    abstract protected void registerTestMethods();
+
+    public RTWTestCaseResult execute() {
+        List<RTWTestMethodResult> testMethodResults = testMethods.stream().map(this::runSingleTestMethod).collect(Collectors.toList());
+        return new RTWTestCaseResult(testMethodResults);
+    }
+
+    private RTWTestMethodResult runSingleTestMethod(Runnable testMethod) {
+        try {
+            testMethod.run();
+        } catch (Throwable e) {
+            return new RTWTestMethodResult(e);
+        }
+        return new RTWTestMethodResult();
+    }
+}
