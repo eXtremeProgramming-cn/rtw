@@ -1,4 +1,4 @@
-package cn.extremeprogramming.rtw.xunit;
+package cn.extremeprogramming.rtw.xunit.result;
 
 public class RTWTestMethodResult {
     final boolean isSuccessful;
@@ -9,5 +9,10 @@ public class RTWTestMethodResult {
 
     public RTWTestMethodResult() {
         isSuccessful = true;
+    }
+
+    @Override
+    public String toString() {
+        return isSuccessful ? "." : "x";
     }
 }

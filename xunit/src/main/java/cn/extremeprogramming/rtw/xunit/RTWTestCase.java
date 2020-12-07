@@ -1,5 +1,8 @@
 package cn.extremeprogramming.rtw.xunit;
 
+import cn.extremeprogramming.rtw.xunit.result.RTWTestCaseResult;
+import cn.extremeprogramming.rtw.xunit.result.RTWTestMethodResult;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
